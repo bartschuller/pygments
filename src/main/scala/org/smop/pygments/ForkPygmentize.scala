@@ -25,8 +25,8 @@ class ForkPygmentize extends PygmentizeParsers with Pygments {
     val (source, proc) = runCommand("pygmentize", "-L", "lexers")
     parseAll(allLexersParser, source) match {
       case Success(res, in) => {proc.waitFor(); res}
-      case Failure(msg, in) => {proc.destroy(); throw new PygmentsException(msg)}
-      case Error(msg, in) => {proc.destroy(); throw new PygmentsException(msg)}
+      case Failure(msg, in) => {proc.destroy(); throw new PygmentsException("Parse failure: "+msg+" at "+in.pos)}
+      case Error(msg, in) => {proc.destroy(); throw new PygmentsException("Parse error: "+msg+" at "+in.pos)}
     }
   }
   def runCommand(args: String*): Product2[BufferedReader, Process] = {
@@ -43,7 +43,7 @@ class PygmentizeParsers extends JavaTokenParsers {
   def lexerDef: Parser[LexerDefinition] = "*"~>repsep(alias, ",")~(":"~nl~>name)~(filenames<~nl) ^^ {
     case as~n~fns => LexerDefinition(n, as, fns)
   }
-  def alias: Parser[String] = """\w[-+.#\w]*""".r
+  def alias: Parser[String] = """\w[^,:]*""".r
   def name: Parser[String] = """[^(\r\n]+(?<! )""".r
   def filename: Parser[String] = """[^)\s,]+""".r
   def filenames: Parser[List[String]] = opt("(filenames "~>repsep(filename, ", ")<~")") ^^ {
