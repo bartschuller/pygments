@@ -14,6 +14,8 @@ object PygmentsSpecification extends Specification with ConsoleLog {
     "highlight stuff" in {
       val hl = p.highlight("<html>", Lexer("html"), Formatter("html"))
       hl mustMatch "<div"
+      val big = <div>{1 to 100 map(k => <p>Hello there {k}.</p><ul>{1 to 10 map(i => <li>{1000*k+i}</li>)}</ul>)}</div>.toString
+      p.highlight(big, Lexer("html"), Formatter("html")) mustMatch "<div"
     }
   }
 }
