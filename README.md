@@ -6,8 +6,27 @@ Scala library for producing syntax-highlighted text, using the Pygments tool
 
 Add the dependency to your project, for [sbt](http://code.google.com/p/simple-build-tool/):
 
-    val lunatechPublic = "Lunatech Public" at "http://nexus.lunatech.com/content/repositories/lunatech-public/"
-    val pygments = "org.smop" %% "pygments" % "0.1"
+```scala
+val lunatechPublic = "Lunatech Public" at "http://nexus.lunatech.com/content/repositories/lunatech-public/"
+val pygments = "org.smop" %% "pygments" % "0.1"
+```
+
+Or for [Play! 1.2](http://www.playframework.org/):
+
+```yaml
+# Application dependencies
+
+require:
+    - play
+    - play -> scala 0.9
+    - org.smop -> pygments_2.8.1 0.1.0
+repositories:
+    - lunatechPublic:
+        type: iBiblio
+        root: "http://nexus.lunatech.com/content/repositories/lunatech-public/"
+        contains:
+            - org.smop -> *
+```
 
 Install [pygments](http://pygments.org/) (the Python library/tool) and make sure the `pygmentize` command is on your PATH.
 
