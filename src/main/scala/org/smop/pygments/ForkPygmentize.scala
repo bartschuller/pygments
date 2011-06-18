@@ -7,7 +7,9 @@ import java.io.{BufferedReader, Reader, InputStreamReader}
 class ForkPygmentize extends PygmentizeParsers with Pygments {
   val style = "tango"
   def highlight(code: String, lexer: Lexer, formatter: Formatter): String = {
-    val (res: BufferedReader, proc: Process) = runCommand("pygmentize", "-l", lexer.name, "-f", formatter.name)
+    val options: Seq[String] = Seq("pygmentize", "-l", lexer.name, "-f", formatter.name)
+    val args = options ++ formatter.options.flatMap(t => Seq("-P", t._1 + "=" + t._2))
+    val (res: BufferedReader, proc: Process) = runCommand(args:_*)
     val os = proc.getOutputStream
     // weird that this doesn't block when code is large.
     os.write(code.getBytes(Codec.UTF8))
@@ -16,6 +18,7 @@ class ForkPygmentize extends PygmentizeParsers with Pygments {
     var s: String = res.readLine
     while(s != null) {
       sb.append(s)
+      sb.append("\n")
       s = res.readLine
     }
     proc.waitFor()
