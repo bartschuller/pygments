@@ -14,6 +14,19 @@ trait Pygments {
   def highlight(code: String, lexer: Lexer, formatter: Formatter): String
 
   def allLexers: Iterable[LexerDefinition]
+
+  def findLexer(fileName: String): Option[String] = {
+    allLexers.find(_ match {
+      case LexerDefinition(_, _, patterns) => patterns.exists(globMatches(_, fileName))
+    }).map(_.name)
+  }
+
+  private def globMatches(glob: String, fileName: String): Boolean = {
+    if (glob.contains("*")) {
+      fileName.matches(glob.replaceAllLiterally(".", "\\.").replaceAllLiterally("*", ".*"))
+    } else
+      glob == fileName
+  }
 }
 
 object Pygments {

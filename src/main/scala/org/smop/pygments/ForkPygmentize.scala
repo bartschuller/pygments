@@ -24,7 +24,7 @@ class ForkPygmentize extends PygmentizeParsers with Pygments {
     proc.waitFor()
     sb.toString
   }
-  def allLexers: Iterable[LexerDefinition] = {
+  lazy val allLexers: Iterable[LexerDefinition] = {
     val (source, proc) = runCommand("pygmentize", "-L", "lexers")
     parseAll(allLexersParser, source) match {
       case Success(res, in) => {proc.waitFor(); res}

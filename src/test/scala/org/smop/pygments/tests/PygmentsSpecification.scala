@@ -11,6 +11,12 @@ object PygmentsSpecification extends Specification with ConsoleLog {
     "list all lexers" in {
       p.allLexers must contain(LexerDefinition("Tcsh", List("tcsh", "csh"), List("*.tcsh", "*.csh")))
     }
+    "match on filename" in {
+      p.findLexer("Makefile") must beSome("Makefile")
+      p.findLexer("my file.scala") must beSome("Scala")
+      p.findLexer("Makefile.in") must beSome("Makefile")
+      p.findLexer("garble.hdughiuer") must beNone
+    }
     "highlight stuff" in {
       val hl = p.highlight("<html>", Lexer("html"), Formatter("html"))
       hl mustMatch "<div"
