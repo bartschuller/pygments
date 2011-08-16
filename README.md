@@ -8,7 +8,7 @@ Add the dependency to your project, for [sbt](http://code.google.com/p/simple-bu
 
 ```scala
 val lunatechPublic = "Lunatech Public" at "http://nexus.lunatech.com/content/repositories/lunatech-public/"
-val pygments = "org.smop" %% "pygments" % "0.1"
+val pygments = "org.smop" %% "pygments" % "0.1.4"
 ```
 
 Or for [Play! 1.2](http://www.playframework.org/):
@@ -19,7 +19,7 @@ Or for [Play! 1.2](http://www.playframework.org/):
 require:
     - play
     - play -> scala 0.9
-    - org.smop -> pygments_2.8.1 0.1.0
+    - org.smop -> pygments_2.8.1 0.1.4
 repositories:
     - lunatechPublic:
         type: iBiblio
@@ -55,7 +55,7 @@ The project is currently hosted at [GitHub](https://github.com/bartschuller/pygm
 
 The *org.smop pygments* library is published under the [Simplified BSD License](http://www.opensource.org/licenses/bsd-license):
 
-Copyright © 2011, Bart Schuller  
+Copyright © 2011, Bart Schuller
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
