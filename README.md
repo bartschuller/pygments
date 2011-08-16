@@ -55,7 +55,7 @@ The project is currently hosted at [GitHub](https://github.com/bartschuller/pygm
 
 The *org.smop pygments* library is published under the [Simplified BSD License](http://www.opensource.org/licenses/bsd-license):
 
-Copyright © 2011, Bart Schuller
+Copyright © 2011, Bart Schuller  
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
