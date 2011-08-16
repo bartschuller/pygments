@@ -31,5 +31,9 @@ object PygmentsSpecification extends Specification with ConsoleLog {
       </div>.toString
       p.highlight(big, Lexer("html"), Formatter("html")) mustMatch "<div"
     }
+    "handle UTF-8 properly" in {
+      val hl = p.highlight("Ëñçødîng", Lexer("text"), Formatter("html"))
+      hl must include("Ëñçødîng")
+    }
   }
 }

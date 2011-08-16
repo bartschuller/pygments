@@ -33,7 +33,7 @@ class ForkPygmentize extends PygmentizeParsers with Pygments {
     }
   }
   def runCommand(args: String*): Product2[BufferedReader, Process] = {
-    val pb = new ProcessBuilder(args: _*)
+    val pb = new ProcessBuilder(List("env", "LC_CTYPE=en_US.UTF-8", "PYTHONIOENCODING=UTF-8") ++ args: _*)
     val proc = pb.start()
     (new BufferedReader(new InputStreamReader(proc.getInputStream, Codec.UTF8)), proc)
   }
