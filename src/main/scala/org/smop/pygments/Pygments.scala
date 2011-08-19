@@ -21,9 +21,10 @@ trait Pygments {
     }).map(_.name)
   }
 
-  private def globMatches(glob: String, fileName: String): Boolean = {
+  def globMatches(glob: String, fileName: String): Boolean = {
     if (glob.contains("*")) {
-      fileName.matches(glob.replaceAllLiterally(".", "\\.").replaceAllLiterally("*", ".*"))
+      val re = glob.replaceAll("\\.", "\\\\.").replaceAll("\\*", ".*")
+      fileName.matches(re)
     } else
       glob == fileName
   }

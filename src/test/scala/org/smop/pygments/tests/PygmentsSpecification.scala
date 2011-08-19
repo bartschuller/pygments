@@ -15,7 +15,7 @@ object PygmentsSpecification extends Specification with ConsoleLog {
       p.findLexer("Makefile") must beSome("Makefile")
       p.findLexer("my file.scala") must beSome("Scala")
       p.findLexer("Makefile.in") must beSome("Makefile")
-      p.findLexer("garble.hdughiuer") must beNone
+      p.findLexer("garble.hdughiuepl") must beNone
     }
     "highlight stuff" in {
       val hl = p.highlight("<html>", Lexer("html"), Formatter("html"))
